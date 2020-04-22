@@ -1,0 +1,54 @@
+.Cal-Container {
+  max-width: 100%;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
+    0 1px 3px 0 rgba(63, 63, 68, 0.15);
+}
+
+.Cal-Title-Container {
+  font-size: 1.2rem;
+  color: gray;
+}
+
+.Weekday-Container {
+  display: flex;
+}
+
+.Week {
+  display: flex;
+}
+
+.Weekday {
+  display: block;
+  flex: 1 0 0%;
+  padding: 0, 8rem;
+  background: transparent;
+  font-size: 1.2rem;
+  color: gray;
+  text-align: center;
+}
+
+.DisableDay {
+  display: block;
+  flex: 1 0 0%;
+  width: calc(100% / 7);
+  margin: 0;
+  padding: 0.8rem;
+  border: 1px solid #dfe3eb;
+}
+
+.AbleDay {
+  display: block;
+  flex: 1 0 0%;
+  width: 14.28571%;
+  margin: 0;
+  padding: 0.8rem;
+  background: transparent;
+  border: 1px solid #dfe3eb;
+  border-radius: 0;
+  outline: none;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+}
