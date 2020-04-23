@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import WeekDay from "./Weekday";
-import Day from "./Day";
+import Day from "../containers/Day";
 import { weekDays, getWeeksForMonth } from "./utils/Util";
 
-//import "./styles/calendar.css";
+import "./styles/calendar.css";
 
 class Month extends Component {
   constructor(props) {
     super(props);
+
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.renderWeek = this.renderWeek.bind(this);
+
+    this.state = {
+      hoverDay: null,
+    };
   }
 
   render() {
@@ -27,7 +34,7 @@ class Month extends Component {
     });
 
     return (
-      <table>
+      <table className="Table">
         <tr>{weekDaysMap}</tr>
         {weeksMap}
       </table>
@@ -36,11 +43,34 @@ class Month extends Component {
 
   // Rendering weeks
   renderWeek(fullDate, dayIndex) {
+    const { hoverDay } = this.state;
+
     if (fullDate == null) {
       return <Day key={dayIndex} />;
     }
     const date = fullDate.getDate();
-    return <Day key={dayIndex} fullDate={fullDate} />;
+    return (
+      <Day
+        key={dayIndex}
+        fullDate={fullDate}
+        hovering={date === hoverDay}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onModalChange={this.props.onModalChange}
+      />
+    );
+  }
+
+  handleMouseEnter(date) {
+    this.setState({
+      hoverDay: date,
+    });
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      hoverDay: null,
+    });
   }
 }
 

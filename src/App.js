@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Calendar from "./components/Calendar";
+import Modal from "./containers/Modal";
 
 import "./app.css";
 
@@ -8,28 +9,54 @@ class App extends Component {
     super(props);
 
     this.handleMonthChange = this.handleMonthChange.bind(this);
+    this.handleModalChange = this.handleModalChange.bind(this);
 
     this.state = {
       getMonthNumber: new Date().getMonth(),
       getYearNumber: new Date().getFullYear(),
+      getModalStatus: false,
+      getDate: 0,
+      getMonth: 0,
     };
   }
 
   render() {
-    const { getMonthNumber, getYearNumber } = this.state;
+    const {
+      getMonthNumber,
+      getYearNumber,
+      getModalStatus,
+      getDate,
+      getMonth,
+    } = this.state;
 
     return (
       <div className="Calendar">
         <div className="Main">
+          <Modal
+            modalStatus={getModalStatus}
+            date={getDate}
+            month={getMonth}
+            onModalChange={this.handleModalChange}
+          />
           <Calendar
             monthNumber={getMonthNumber}
             yearNumber={getYearNumber}
             onMonthChange={this.handleMonthChange}
+            onModalChange={this.handleModalChange}
           />
         </div>
-        <small>Developed by Camilo Villegas</small>
+        <br />
+        <small className="Calendar-dev">Developed by Camilo Villegas</small>
       </div>
     );
+  }
+
+  handleModalChange(date, month) {
+    if (date && month) {
+      this.setState({ getModalStatus: true, getDate: date, getMonth: month });
+    } else {
+      this.setState({ getModalStatus: false });
+    }
   }
 
   handleMonthChange(modf) {

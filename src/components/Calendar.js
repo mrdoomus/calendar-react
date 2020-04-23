@@ -7,7 +7,12 @@ import { getMonthName } from "./utils/Util";
 
 class Calendar extends Component {
   render() {
-    const { monthNumber, yearNumber, onMonthChange } = this.props;
+    const {
+      monthNumber,
+      yearNumber,
+      onMonthChange,
+      onModalChange,
+    } = this.props;
 
     const monthName = getMonthName(monthNumber);
     return (
@@ -15,7 +20,12 @@ class Calendar extends Component {
         <h1>
           {monthName} {yearNumber}
         </h1>
-        <Month month={monthNumber} year={yearNumber} />
+        <hr />
+        <Month
+          month={monthNumber}
+          year={yearNumber}
+          onModalChange={onModalChange}
+        />
         <MonthChange onMonthChange={onMonthChange} />
       </div>
     );
