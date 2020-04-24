@@ -23,7 +23,7 @@ function Day({
       <th className="Table-th" onMouseLeave={onMouseLeave}>
         <div
           className="Table-th-div"
-          onClick={onModalChange.bind(this, date, month)}
+          onClick={onModalChange.bind(this, date, month, null, "CREATE")}
         >
           + new reminder
         </div>
@@ -31,7 +31,13 @@ function Day({
           reminder.date === date && reminder.month === month ? (
             <div
               key={reminder.id}
-              onClick={onModalChange.bind(this, date, month)}
+              onClick={onModalChange.bind(
+                this,
+                date,
+                month,
+                reminder.id,
+                "UPDATE"
+              )}
             >
               {reminder.title}
             </div>

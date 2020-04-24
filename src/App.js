@@ -15,8 +15,10 @@ class App extends Component {
       getMonthNumber: new Date().getMonth(),
       getYearNumber: new Date().getFullYear(),
       getModalStatus: false,
+      getModalAction: "",
       getDate: 0,
       getMonth: 0,
+      getId: 0,
     };
   }
 
@@ -25,19 +27,26 @@ class App extends Component {
       getMonthNumber,
       getYearNumber,
       getModalStatus,
+      getModalAction,
       getDate,
       getMonth,
+      getId,
     } = this.state;
 
     return (
       <div className="Calendar">
         <div className="Main">
-          <Modal
-            modalStatus={getModalStatus}
-            date={getDate}
-            month={getMonth}
-            onModalChange={this.handleModalChange}
-          />
+          {getModalStatus ? (
+            <Modal
+              modalStatus={getModalStatus}
+              modalAction={getModalAction}
+              date={getDate}
+              month={getMonth}
+              id={getId}
+              onModalChange={this.handleModalChange}
+            />
+          ) : null}
+
           <Calendar
             monthNumber={getMonthNumber}
             yearNumber={getYearNumber}
@@ -51,9 +60,22 @@ class App extends Component {
     );
   }
 
-  handleModalChange(date, month) {
-    if (date && month) {
-      this.setState({ getModalStatus: true, getDate: date, getMonth: month });
+  handleModalChange(date, month, id, action) {
+    if (date && month && action === "CREATE") {
+      this.setState({
+        getModalStatus: true,
+        getDate: date,
+        getMonth: month,
+        getModalAction: "CREATE",
+      });
+    } else if (date && month && id && action === "UPDATE") {
+      this.setState({
+        getModalStatus: true,
+        getDate: date,
+        getMonth: month,
+        getId: id,
+        getModalAction: "UPDATE",
+      });
     } else {
       this.setState({ getModalStatus: false });
     }

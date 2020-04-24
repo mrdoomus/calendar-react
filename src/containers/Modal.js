@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as reminderActions from "../redux/actions/index";
+import {
+  createReminder,
+  deleteReminder,
+  updateReminder,
+} from "../redux/actions/index";
 
 import "../components/styles/modal.css";
 
@@ -37,6 +40,21 @@ class Modal extends Component {
         color: "red",
       },
     };
+
+    if (this.props.modalAction === "UPDATE") {
+      const selectedReminder = this.props.reminders.filter(
+        (reminder) => reminder.id === this.props.id
+      );
+
+      // Setting state with selected reminder
+      this.state.reminder.id = selectedReminder[0].id;
+      this.state.reminder.title = selectedReminder[0].title;
+      this.state.reminder.city = selectedReminder[0].city;
+      this.state.reminder.date = selectedReminder[0].date;
+      this.state.reminder.month = selectedReminder[0].month;
+      this.state.reminder.time = selectedReminder[0].time;
+      this.state.reminder.color = selectedReminder[0].color;
+    }
   }
 
   handleTitleChange = (event) => {
@@ -56,7 +74,7 @@ class Modal extends Component {
 
   // handleColorChange = (event) => {};
 
-  handleSubmit = (event) => {
+  handleSubmitCreate = (event) => {
     event.preventDefault();
 
     // Setting id and date to new reminder
@@ -66,7 +84,7 @@ class Modal extends Component {
 
     // Correct info check of reminder
     if (checkInfo(this.state.reminder) === "TRUE") {
-      this.props.actions.createReminder(this.state.reminder);
+      this.props.onCreateReminder(this.state.reminder);
       alert("A new reminder was added");
       this.props.onModalChange(null);
 
@@ -87,15 +105,49 @@ class Modal extends Component {
     }
   };
 
-  render() {
-    const { modalStatus } = this.props;
+  handleSubmitUpdate = (event) => {
+    event.preventDefault();
 
-    if (modalStatus) {
+    // Correct info check of reminder
+    if (checkInfo(this.state.reminder) === "TRUE") {
+      this.props.onUpdateReminder(this.state.reminder);
+      alert("Reminder updated succesfully");
+      this.props.onModalChange(null);
+
+      // Resetting input values
+      this.setState({
+        reminder: {
+          id: 0,
+          title: "",
+          city: "",
+          date: 0,
+          month: 0,
+          time: "",
+          color: "red",
+        },
+      });
+    } else {
+      alert(checkInfo(this.state.reminder));
+    }
+  };
+
+  handleDelete(id) {
+    this.props.onDeleteReminder(id);
+    alert("Reminder deleted succesfully");
+    this.props.onModalChange(null);
+  }
+
+  render() {
+    const { modalStatus, modalAction } = this.props;
+
+    // If we'll create a new reminder
+    if (modalStatus && modalAction === "CREATE") {
       return ReactDOM.createPortal(
         <div id="modal">
           <div class="modal-outside">
             <div class="modal-inside">
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmitCreate}>
+                <h2>Create Reminder</h2>
                 <p>Title</p>
                 <input
                   type="text"
@@ -121,6 +173,47 @@ class Modal extends Component {
         </div>,
         document.getElementById("modal")
       );
+
+      // If we'll edit an existing Reminder
+    } else if (modalStatus && modalAction === "UPDATE") {
+      return ReactDOM.createPortal(
+        <div id="modal">
+          <div class="modal-outside">
+            <div class="modal-inside">
+              <form onSubmit={this.handleSubmitUpdate}>
+                <h2>Edit Reminder</h2>
+                <p>Title</p>
+                <input
+                  type="text"
+                  onChange={this.handleTitleChange}
+                  value={this.state.reminder.title}
+                />
+                <p>City</p>
+                <input
+                  type="text"
+                  onChange={this.handleCityChange}
+                  value={this.state.reminder.city}
+                />
+                <p>Time</p>
+                <input
+                  type="time"
+                  onChange={this.handleTimeChange}
+                  value={this.state.reminder.time}
+                />
+                <small
+                  onClick={() => {
+                    this.handleDelete(this.state.reminder.id);
+                  }}
+                >
+                  Delete this reminder
+                </small>
+                <input type="submit" value="Save" />
+              </form>
+            </div>
+          </div>
+        </div>,
+        document.getElementById("modal")
+      );
     } else {
       return null;
     }
@@ -137,7 +230,15 @@ function mapStateToProps(state) {
 // Passing allowed actions
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(reminderActions, dispatch),
+    onCreateReminder: (reminder) => {
+      dispatch(createReminder(reminder));
+    },
+    onUpdateReminder: (reminder) => {
+      dispatch(updateReminder(reminder.id, reminder));
+    },
+    onDeleteReminder: (id) => {
+      dispatch(deleteReminder(id));
+    },
   };
 }
 

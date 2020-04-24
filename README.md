@@ -46,7 +46,7 @@ You will also see any lint errors in the console.
       include a city.
 - [x] Display reminders on the calendar view in the correct time order.
 - [] Allow the user to select color when creating a reminder and display it appropriately.
-- [] Ability to edit reminders – including changing text, city, day, time and color.
+- [x] Ability to edit reminders – including changing text, city, day, time and color.
 - [] Add a weather service call from a free API such as ​Open Weather Map​, and get the
   weather forecast (ex. Rain) for the date of the calendar reminder based on the city.
 - [] Unit test the functionality: ​Ability to add a new "reminder" (max 30 chars) for a user
@@ -56,7 +56,7 @@ You will also see any lint errors in the console.
 
 - [x] Expand the calendar to support more than the current month.
 - [x] Properly handle overflow when multiple reminders appear on the same date.
-- [] Functionality to delete one or ALL the reminders for a specific day
+- [x] Functionality to delete one or ALL the reminders for a specific day
 
 ## Built With
 
