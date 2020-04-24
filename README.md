@@ -66,7 +66,6 @@ Then press 'a' to run all tests.
 - [ReactJS](https://es.reactjs.org/) - Javascript library for frontend.
 - [Redux](https://es.redux.js.org/) - React state manager.
 - [Jest](https://jestjs.io/) - Javascript testing tool.
-- [Bootstrap](https://getbootstrap.com/) - Frontend framework.
 
 ## Authors
 
