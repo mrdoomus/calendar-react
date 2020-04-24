@@ -31,6 +31,7 @@ function Day({
           reminder.date === date && reminder.month === month ? (
             <div
               key={reminder.id}
+              style={{ backgroundColor: reminder.color }}
               onClick={onModalChange.bind(
                 this,
                 date,
@@ -52,7 +53,9 @@ function Day({
 
         {reminders.map((reminder) =>
           reminder.date === date && reminder.month === month ? (
-            <div key={reminder.id}>{reminder.title}</div>
+            <div key={reminder.id} style={{ backgroundColor: reminder.color }}>
+              {reminder.title}
+            </div>
           ) : null
         )}
       </th>

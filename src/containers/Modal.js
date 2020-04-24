@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import ColorPick from "../components/ColorPick";
+import Weather from "../components/Weather";
 import { connect } from "react-redux";
 import {
   createReminder,
@@ -29,6 +31,7 @@ class Modal extends Component {
   constructor(props) {
     super(props);
 
+    // Default state
     this.state = {
       reminder: {
         id: 0,
@@ -37,10 +40,11 @@ class Modal extends Component {
         date: 0,
         month: 0,
         time: "",
-        color: "red",
+        color: "",
       },
     };
 
+    // If a Reminder wants to be UPDATED, set state to Reminder vaules
     if (this.props.modalAction === "UPDATE") {
       const selectedReminder = this.props.reminders.filter(
         (reminder) => reminder.id === this.props.id
@@ -57,6 +61,7 @@ class Modal extends Component {
     }
   }
 
+  //
   handleTitleChange = (event) => {
     const reminder = { ...this.state.reminder, title: event.target.value };
     this.setState({ reminder });
@@ -72,8 +77,12 @@ class Modal extends Component {
     this.setState({ reminder });
   };
 
-  // handleColorChange = (event) => {};
+  handleColorChange = (color) => {
+    const reminder = { ...this.state.reminder, color: color };
+    this.setState({ reminder });
+  };
 
+  // Handling Reminder Creation
   handleSubmitCreate = (event) => {
     event.preventDefault();
 
@@ -97,7 +106,7 @@ class Modal extends Component {
           date: 0,
           month: 0,
           time: "",
-          color: "red",
+          color: "",
         },
       });
     } else {
@@ -105,6 +114,7 @@ class Modal extends Component {
     }
   };
 
+  // Handling Reminder Update
   handleSubmitUpdate = (event) => {
     event.preventDefault();
 
@@ -123,7 +133,7 @@ class Modal extends Component {
           date: 0,
           month: 0,
           time: "",
-          color: "red",
+          color: "",
         },
       });
     } else {
@@ -131,6 +141,7 @@ class Modal extends Component {
     }
   };
 
+  // Handling Reminder Delete
   handleDelete(id) {
     this.props.onDeleteReminder(id);
     alert("Reminder deleted succesfully");
@@ -166,6 +177,15 @@ class Modal extends Component {
                   onChange={this.handleTimeChange}
                   value={this.state.reminder.time}
                 />
+                <p>Color</p>
+                <div
+                  style={{
+                    height: "20px",
+                    width: "20px",
+                    backgroundColor: this.state.reminder.color,
+                  }}
+                />
+                <ColorPick onColorClick={this.handleColorChange} />
                 <input type="submit" value="Save" />
               </form>
             </div>
@@ -194,12 +214,22 @@ class Modal extends Component {
                   onChange={this.handleCityChange}
                   value={this.state.reminder.city}
                 />
+                <Weather currCity={this.state.reminder.city} />
                 <p>Time</p>
                 <input
                   type="time"
                   onChange={this.handleTimeChange}
                   value={this.state.reminder.time}
                 />
+                <p>Color</p>
+                <div
+                  style={{
+                    height: "20px",
+                    width: "20px",
+                    backgroundColor: this.state.reminder.color,
+                  }}
+                />
+                <ColorPick onColorClick={this.handleColorChange} />
                 <small
                   onClick={() => {
                     this.handleDelete(this.state.reminder.id);
