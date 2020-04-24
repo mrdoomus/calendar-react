@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import ColorPick from "../components/ColorPick";
 import Weather from "../components/Weather";
+
+import { checkInfo } from "../components/utils/Util";
 import { connect } from "react-redux";
 import {
   createReminder,
@@ -10,22 +12,6 @@ import {
 } from "../redux/actions/index";
 
 import "../components/styles/modal.css";
-
-/* Checking if passed info is correct
-@reminder - object of a reminder with (id, title, city, date, time, color)
-return - error if encountered or TRUE is no error encountered
-*/
-export const checkInfo = (reminder) => {
-  if (Object.values(reminder).some((value) => value === "")) {
-    return "Fields can't be empty. Please fill them.";
-  }
-
-  if (reminder.title.length > 30) {
-    return "Title can't be more than 30 chars. Please correct title.";
-  }
-
-  return "TRUE";
-};
 
 class Modal extends Component {
   constructor(props) {
@@ -36,6 +22,7 @@ class Modal extends Component {
       reminder: {
         id: 0,
         title: "",
+        user: "",
         city: "",
         date: 0,
         month: 0,
@@ -53,6 +40,7 @@ class Modal extends Component {
       // Setting state with selected reminder
       this.state.reminder.id = selectedReminder[0].id;
       this.state.reminder.title = selectedReminder[0].title;
+      this.state.reminder.user = selectedReminder[0].user;
       this.state.reminder.city = selectedReminder[0].city;
       this.state.reminder.date = selectedReminder[0].date;
       this.state.reminder.month = selectedReminder[0].month;
@@ -61,9 +49,14 @@ class Modal extends Component {
     }
   }
 
-  //
+  // Input handlers
   handleTitleChange = (event) => {
     const reminder = { ...this.state.reminder, title: event.target.value };
+    this.setState({ reminder });
+  };
+
+  handleUserChange = (event) => {
+    const reminder = { ...this.state.reminder, user: event.target.value };
     this.setState({ reminder });
   };
 
@@ -102,6 +95,7 @@ class Modal extends Component {
         reminder: {
           id: 0,
           title: "",
+          user: "",
           city: "",
           date: 0,
           month: 0,
@@ -129,6 +123,7 @@ class Modal extends Component {
         reminder: {
           id: 0,
           title: "",
+          user: "",
           city: "",
           date: 0,
           month: 0,
@@ -164,6 +159,12 @@ class Modal extends Component {
                   type="text"
                   onChange={this.handleTitleChange}
                   value={this.state.reminder.title}
+                />
+                <p>User</p>
+                <input
+                  type="text"
+                  onChange={this.handleUserChange}
+                  value={this.state.reminder.user}
                 />
                 <p>City</p>
                 <input
@@ -207,6 +208,12 @@ class Modal extends Component {
                   type="text"
                   onChange={this.handleTitleChange}
                   value={this.state.reminder.title}
+                />
+                <p>User</p>
+                <input
+                  type="text"
+                  onChange={this.handleUserChange}
+                  value={this.state.reminder.user}
                 />
                 <p>City</p>
                 <input

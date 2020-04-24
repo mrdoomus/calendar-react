@@ -11,6 +11,9 @@ function Weather({ currCity }) {
       .then((res) => res.json())
       .then((data) => {
         setForecast(data.weather[0].main);
+      })
+      .catch((e) => {
+        console.error(e);
       });
   }, []);
 

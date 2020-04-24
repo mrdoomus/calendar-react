@@ -57,3 +57,19 @@ export function getWeeksForMonth(month, year) {
 
   return weeks;
 }
+
+/* Checking if passed info is correct
+@reminder - object of a reminder with (id, title, city, date, time, color)
+return - error if encountered or TRUE is no error encountered
+*/
+export function checkInfo(reminder) {
+  if (Object.values(reminder).some((value) => value === "")) {
+    return "Fields can't be empty. Please fill them.";
+  }
+
+  if (reminder.title.length > 30) {
+    return "Title can't be more than 30 chars. Please correct title.";
+  }
+
+  return "TRUE";
+}
