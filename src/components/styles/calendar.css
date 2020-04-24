@@ -1,5 +1,5 @@
 .Table {
-  width: 1000px;
+  width: 1080px;
   height: 400px;
 }
 
@@ -9,8 +9,45 @@
 
 .Table-th {
   border: 1px solid whitesmoke;
+  width: 100px;
 }
 
 .Table-th-div {
-  background-color: red;
+  margin: 0 20px 0 20px;
+}
+
+.Table-th-div-hover {
+  font-size: 12px;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: black;
+  margin: 0 20px 0 20px;
+}
+
+.Table-th-reminder-div {
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+.Table-th-reminder-div:hover {
+  opacity: 1;
+}
+
+.prev-month {
+  cursor: pointer;
+  border: none;
+  margin-top: 10px;
+  float: left;
+  background-color: white;
+}
+
+.next-month {
+  cursor: pointer;
+  border: none;
+  margin-top: 10px;
+  float: right;
+  background-color: white;
 }

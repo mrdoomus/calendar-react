@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import WeekDay from "./Weekday";
 import Day from "../containers/Day";
+
 import { weekDays, getWeeksForMonth } from "./utils/Util";
 
 import "./styles/calendar.css";

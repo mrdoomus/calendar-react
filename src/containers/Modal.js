@@ -148,46 +148,80 @@ class Modal extends Component {
 
     // If we'll create a new reminder
     if (modalStatus && modalAction === "CREATE") {
+      // If Escp is pressed, exit modal
+      window.onkeydown = (e) => {
+        if (e.key === "Escape") {
+          this.props.onModalChange(null);
+        }
+      };
+
       return ReactDOM.createPortal(
         <div id="modal">
-          <div class="modal-outside">
-            <div class="modal-inside">
-              <form onSubmit={this.handleSubmitCreate}>
-                <h2>Create Reminder</h2>
-                <p>Title</p>
+          <div className="modal-outside">
+            <div className="modal-inside">
+              <form className="modal-form" onSubmit={this.handleSubmitCreate}>
+                <h2 class="modal-title">Create Reminder</h2>
+                <hr style={{ marginBottom: "20px" }} />
+
+                {/* Title */}
+                <b>
+                  <p className="modal-subtitle">Title</p>
+                </b>
                 <input
+                  className="modal-input-subtitle"
                   type="text"
                   onChange={this.handleTitleChange}
                   value={this.state.reminder.title}
                 />
-                <p>User</p>
+
+                {/* User */}
+                <b>
+                  <p className="modal-user">User</p>
+                </b>
                 <input
+                  className="modal-input-user"
                   type="text"
                   onChange={this.handleUserChange}
                   value={this.state.reminder.user}
                 />
-                <p>City</p>
+
+                {/* City */}
+                <b>
+                  <p className="modal-city">City</p>
+                </b>
                 <input
+                  className="modal-input-city"
                   type="text"
                   onChange={this.handleCityChange}
                   value={this.state.reminder.city}
                 />
-                <p>Time</p>
+
+                {/* Time */}
+                <b>
+                  <p className="modal-time">Time</p>
+                </b>
                 <input
+                  className="modal-input-time"
                   type="time"
                   onChange={this.handleTimeChange}
                   value={this.state.reminder.time}
                 />
-                <p>Color</p>
+
+                {/* Color Pick */}
                 <div
-                  style={{
-                    height: "20px",
-                    width: "20px",
-                    backgroundColor: this.state.reminder.color,
-                  }}
-                />
+                  className="modal-input-color"
+                  style={{ color: this.state.reminder.color }}
+                >
+                  <b>Selected color</b>
+                </div>
                 <ColorPick onColorClick={this.handleColorChange} />
-                <input type="submit" value="Save" />
+
+                {/* Update Reminder */}
+                <input
+                  className="modal-input-save"
+                  type="submit"
+                  value="Create Reminder"
+                />
               </form>
             </div>
           </div>
@@ -197,54 +231,96 @@ class Modal extends Component {
 
       // If we'll edit an existing Reminder
     } else if (modalStatus && modalAction === "UPDATE") {
+      // If Escp is pressed, exit modal
+      window.onkeydown = (e) => {
+        if (e.key === "Escape") {
+          this.props.onModalChange(null);
+        }
+      };
       return ReactDOM.createPortal(
         <div id="modal">
           <div class="modal-outside">
             <div class="modal-inside">
               <form onSubmit={this.handleSubmitUpdate}>
-                <h2>Edit Reminder</h2>
-                <p>Title</p>
+                <h2>Update Reminder</h2>
+                <hr style={{ marginBottom: "20px" }} />
+
+                {/* Title */}
+                <b>
+                  <p className="modal-subtitle">Title</p>
+                </b>
                 <input
+                  className="modal-input-subtitle"
                   type="text"
                   onChange={this.handleTitleChange}
                   value={this.state.reminder.title}
                 />
-                <p>User</p>
+
+                {/* User */}
+                <b>
+                  <p className="modal-user">User</p>
+                </b>
                 <input
+                  className="modal-input-user"
                   type="text"
                   onChange={this.handleUserChange}
                   value={this.state.reminder.user}
                 />
-                <p>City</p>
+
+                {/* City */}
+                <b>
+                  <p className="modal-city">City</p>
+                </b>
+                <Weather currCity={this.state.reminder.city} />
                 <input
+                  className="modal-input-city"
                   type="text"
                   onChange={this.handleCityChange}
                   value={this.state.reminder.city}
                 />
-                <Weather currCity={this.state.reminder.city} />
-                <p>Time</p>
+
+                {/* Time */}
+                <b>
+                  <p className="modal-time">Time</p>
+                </b>
                 <input
+                  className="modal-input-time"
                   type="time"
                   onChange={this.handleTimeChange}
                   value={this.state.reminder.time}
                 />
-                <p>Color</p>
+
+                {/* Color Pick */}
                 <div
-                  style={{
-                    height: "20px",
-                    width: "20px",
-                    backgroundColor: this.state.reminder.color,
-                  }}
-                />
+                  className="modal-input-color"
+                  style={{ color: this.state.reminder.color }}
+                >
+                  <b>Selected color</b>
+                </div>
                 <ColorPick onColorClick={this.handleColorChange} />
-                <small
+
+                {/* Update Reminder */}
+                <input
+                  className="modal-input-save"
+                  type="submit"
+                  value="Update Reminder"
+                />
+
+                {/* Delete reminder*/}
+                <p
+                  style={{
+                    color: "red",
+                    textAlign: "center",
+                    cursor: "pointer",
+                  }}
                   onClick={() => {
                     this.handleDelete(this.state.reminder.id);
                   }}
                 >
-                  Delete this reminder
-                </small>
-                <input type="submit" value="Save" />
+                  <i>
+                    <small>Delete this reminder</small>
+                  </i>
+                </p>
               </form>
             </div>
           </div>

@@ -18,87 +18,62 @@
   min-height: 300px;
   margin: 1rem;
   position: relative;
-  min-width: 500px;
+  min-width: 400px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   justify-self: center;
 }
 
-#modal .modal-title {
-  text-align: center;
-  font-size: 25px;
-  padding-bottom: 15px;
-  -webkit-animation: colorchange 20s infinite alternate;
-}
-@keyframes colorchange {
-  0% {
-    color: blue;
-  }
-
-  10% {
-    color: #8e44ad;
-  }
-
-  20% {
-    color: #1abc9c;
-  }
-
-  30% {
-    color: #d35400;
-  }
-
-  40% {
-    color: blue;
-  }
-
-  50% {
-    color: #34495e;
-  }
-
-  60% {
-    color: blue;
-  }
-
-  70% {
-    color: #2980b9;
-  }
-  80% {
-    color: #f1c40f;
-  }
-
-  90% {
-    color: #2980b9;
-  }
-
-  100% {
-    color: pink;
-  }
+#modal .modal-form {
+  width: 400px;
 }
 
-#modal .modal-subtitle {
-  text-align: center;
-  font-size: 12px;
-  padding: 20px 0 0 0;
+#modal .modal-title,
+.modal-subtitle,
+.modal-user,
+.modal-city,
+.modal-time,
+.modal-color {
+  margin: 0 0 10px 0;
 }
 
-#modal .modal-input {
-  margin: 20px 0 20px 0;
-  height: 50px;
-  text-align: center;
-  font-size: 15px;
+#modal .modal-input-subtitle,
+.modal-input-user,
+.modal-input-city {
+  margin-bottom: 20px;
+  width: 97%;
 }
 
-#modal .modal-button-holder {
-  text-align: center;
+#modal .modal-input-time {
+  margin-bottom: 20px;
 }
-#modal .modal-button {
-  background-color: white;
-  border: none;
-  color: #3f3f3f;
-  margin-top: 20px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: underline;
-  display: inline-block;
-  font-size: 12px;
+
+#modal .modal-input-save {
   cursor: pointer;
+  height: 30px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#modal .modal-input-color {
+  height: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  opacity: 0.8;
+}
+
+.column:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

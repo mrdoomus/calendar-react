@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Month from "./Month";
 import MonthChange from "./MonthChange";
+
 import { getMonthName } from "./utils/Util";
 
 //import "./styles/calendar.css";
@@ -14,6 +15,7 @@ class Calendar extends Component {
       onModalChange,
     } = this.props;
 
+    // Getting the actual anme of a month based on its number
     const monthName = getMonthName(monthNumber);
     return (
       <div>

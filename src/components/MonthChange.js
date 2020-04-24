@@ -1,10 +1,16 @@
 import React from "react";
 
+import "../components/styles/calendar.css";
+
 function MonthChange({ onMonthChange }) {
   return (
     <div>
-      <button onClick={onMonthChange.bind(this, -1)}>Prev Month</button>
-      <button onClick={onMonthChange.bind(this, 1)}>Next Month</button>
+      <button className="prev-month" onClick={onMonthChange.bind(this, -1)}>
+        <b>&lt;&lt; Prev</b>
+      </button>
+      <button className="next-month" onClick={onMonthChange.bind(this, 1)}>
+        <b>Next &gt;&gt;</b>
+      </button>
     </div>
   );
 }

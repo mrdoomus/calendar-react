@@ -7,6 +7,7 @@
 
 .Calendar-dev {
   font-size: 10px;
+  text-decoration: none;
   -webkit-animation: colorchange 20s infinite alternate;
 }
 @keyframes colorchange {

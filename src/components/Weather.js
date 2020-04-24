@@ -17,7 +17,19 @@ function Weather({ currCity }) {
       });
   }, []);
 
-  return <p>{forecast}</p>;
+  return forecast === "" ? (
+    <p style={{ marginTop: "0", marginBottom: "10px" }}>
+      <small>
+        <i>No forecast found for this city</i>
+      </small>
+    </p>
+  ) : (
+    <p style={{ marginTop: "0", marginBottom: "10px" }}>
+      <small>
+        <b>Forecast:</b> {forecast}
+      </small>
+    </p>
+  );
 }
 
 export default Weather;

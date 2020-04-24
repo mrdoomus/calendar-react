@@ -2,6 +2,7 @@ import * as types from "../actions/types";
 
 const reminders = (state = [], action) => {
   switch (action.type) {
+    // Creates a new state with passed object
     case types.CREATE_REMINDER:
       return [
         ...state,
@@ -16,6 +17,7 @@ const reminders = (state = [], action) => {
           color: action.reminder.color,
         },
       ];
+    // Returns object with equeals passed id
     case types.UPDATE_REMINDER:
       return state.map((reminder) => {
         if (reminder.id === action.id) {
@@ -23,6 +25,7 @@ const reminders = (state = [], action) => {
         }
         return reminder;
       });
+    // Returns every object, except the one with the id passed
     case types.DELETE_REMINDER:
       return state.filter((reminder) => reminder.id !== action.id);
     default:

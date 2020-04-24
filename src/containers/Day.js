@@ -22,14 +22,17 @@ function Day({
     return (
       <th className="Table-th" onMouseLeave={onMouseLeave}>
         <div
-          className="Table-th-div"
+          className="Table-th-div-hover"
           onClick={onModalChange.bind(this, date, month, null, "CREATE")}
         >
           + new reminder
         </div>
+
+        {/* Rendering stored reminders for a date or null*/}
         {reminders.map((reminder) =>
           reminder.date === date && reminder.month === month ? (
             <div
+              className="Table-th-reminder-div"
               key={reminder.id}
               style={{ backgroundColor: reminder.color }}
               onClick={onModalChange.bind(
@@ -40,7 +43,10 @@ function Day({
                 "UPDATE"
               )}
             >
-              {reminder.title}
+              <b>{reminder.title}</b> | {reminder.time}
+              <div>
+                <small>{reminder.user}</small>
+              </div>
             </div>
           ) : null
         )}
@@ -49,12 +55,20 @@ function Day({
   } else {
     return (
       <th className="Table-th" onMouseEnter={onMouseEnter.bind(this, date)}>
-        {date}
+        <div className="Table-th-div">{date}</div>
 
+        {/* Rendering stored reminders for a date or null*/}
         {reminders.map((reminder) =>
           reminder.date === date && reminder.month === month ? (
-            <div key={reminder.id} style={{ backgroundColor: reminder.color }}>
-              {reminder.title}
+            <div
+              className="Table-th-reminder-div"
+              key={reminder.id}
+              style={{ backgroundColor: reminder.color }}
+            >
+              <b>{reminder.title}</b> | {reminder.time}
+              <div>
+                <small>{reminder.user}</small>
+              </div>
             </div>
           ) : null
         )}

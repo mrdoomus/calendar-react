@@ -55,7 +55,15 @@ class App extends Component {
           />
         </div>
         <br />
-        <small className="Calendar-dev">Developed by Camilo Villegas</small>
+        <small>
+          <a
+            className="Calendar-dev"
+            href="https://www.github.com/mrdoomus"
+            target="_blank"
+          >
+            Developed by Camilo Villegas
+          </a>
+        </small>
       </div>
     );
   }
