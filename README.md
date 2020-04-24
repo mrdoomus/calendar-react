@@ -1,6 +1,5 @@
+<img align="center" src="https://imgur.com/gllduw6"  width="100%"/>
 # calendar-react
-
-[Image placeholder]
 
 ## Getting Started
 
@@ -38,7 +37,11 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-[To be defined]
+```
+$npm test
+```
+
+Then press 'a' to run all tests.
 
 ### Mandatory Features
 
