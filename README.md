@@ -1,4 +1,4 @@
-<img align="center" src="https://imgur.com/gllduw6"  width="100%"/>
+<img align="center" src="https://imgur.com/gllduw6.png"  width="100%"/>
 # calendar-react
 
 ## Getting Started
