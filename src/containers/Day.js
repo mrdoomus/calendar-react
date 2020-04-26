@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import "../components/styles/calendar.css";
 
@@ -15,35 +16,33 @@ function Day({
     return <th className="Table-no-th" />;
   }
 
-  const date = fullDate.getDate();
-  const month = fullDate.getMonth();
-
   if (hovering) {
     return (
       <th className="Table-th" onMouseLeave={onMouseLeave}>
         <div
           className="Table-th-div-hover"
-          onClick={onModalChange.bind(this, date, month, null, "CREATE")}
+          onClick={onModalChange.bind(this, fullDate.getDate(), null, "CREATE")}
         >
           + new reminder
         </div>
 
         {/* Rendering stored reminders for a date or null*/}
         {reminders.map((reminder) =>
-          reminder.date === date && reminder.month === month ? (
+          reminder.date === fullDate.getDate() &&
+          reminder.month === fullDate.getMonth() &&
+          reminder.year === fullDate.getFullYear() ? (
             <div
               className="Table-th-reminder-div"
               key={reminder.id}
               style={{ backgroundColor: reminder.color }}
               onClick={onModalChange.bind(
                 this,
-                date,
-                month,
+                fullDate.getDate(),
                 reminder.id,
                 "UPDATE"
               )}
             >
-              <b>{reminder.title}</b> | {reminder.time}
+              <b>{reminder.reminder}</b> | {reminder.time}
               <div>
                 <small>{reminder.user}</small>
               </div>
@@ -54,18 +53,23 @@ function Day({
     );
   } else {
     return (
-      <th className="Table-th" onMouseEnter={onMouseEnter.bind(this, date)}>
-        <div className="Table-th-div">{date}</div>
+      <th
+        className="Table-th"
+        onMouseEnter={onMouseEnter.bind(this, fullDate.getDate())}
+      >
+        <div className="Table-th-div">{fullDate.getDate()}</div>
 
         {/* Rendering stored reminders for a date or null*/}
         {reminders.map((reminder) =>
-          reminder.date === date && reminder.month === month ? (
+          reminder.date === fullDate.getDate() &&
+          reminder.month === fullDate.getMonth() &&
+          reminder.year === fullDate.getFullYear() ? (
             <div
               className="Table-th-reminder-div"
               key={reminder.id}
               style={{ backgroundColor: reminder.color }}
             >
-              <b>{reminder.title}</b> | {reminder.time}
+              <b>{reminder.reminder}</b> | {reminder.time}
               <div>
                 <small>{reminder.user}</small>
               </div>
@@ -79,6 +83,8 @@ function Day({
 
 // Passing initial state
 function mapStateToProps(state) {
+  state.reminders.sort((a, b) => (a.time > b.time ? 1 : -1));
+
   return {
     reminders: state.reminders,
   };

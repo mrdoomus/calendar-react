@@ -8,11 +8,12 @@ const reminders = (state = [], action) => {
         ...state,
         {
           id: action.reminder.id,
-          title: action.reminder.title,
+          reminder: action.reminder.reminder,
           user: action.reminder.user,
           city: action.reminder.city,
           date: action.reminder.date,
           month: action.reminder.month,
+          year: action.reminder.year,
           time: action.reminder.time,
           color: action.reminder.color,
         },

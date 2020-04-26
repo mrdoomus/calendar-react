@@ -2,11 +2,11 @@ import { checkInfo } from "../components/utils/Util";
 
 describe("Adding new Reminder", () => {
   describe("Failed attempt", () => {
-    // Testing title length
-    it("Title is > 30 chars", () => {
+    // Testing reminder length
+    it("Reminder is > 30 chars", () => {
       const reminder = {
         id: 1729,
-        title: "This title is certainly more than thirty chars",
+        reminder: "This reminder is certainly more than thirty chars",
         user: "Camilo Villegas",
         city: "Medellin",
         date: 4,
@@ -15,16 +15,16 @@ describe("Adding new Reminder", () => {
         color: "#CA1551",
       };
       expect(checkInfo(reminder)).toEqual(
-        "Title can't be more than 30 chars. Please correct title."
+        "Reminder can't be more than 30 chars. Please correct reminder."
       );
     });
 
     // Testing field values
     describe("Empty fields", () => {
-      it("title is empty", () => {
+      it("reminder is empty", () => {
         const reminder = {
           id: 1729,
-          title: "",
+          reminder: "",
           user: "Camilo Villegas",
           city: "Medellin",
           date: 4,
@@ -37,10 +37,10 @@ describe("Adding new Reminder", () => {
         );
       });
 
-      it("title and user are empty", () => {
+      it("reminder and user are empty", () => {
         const reminder = {
           id: 1729,
-          title: "",
+          reminder: "",
           user: "",
           city: "Medellin",
           date: 4,
@@ -56,7 +56,7 @@ describe("Adding new Reminder", () => {
       it("All fields are empty", () => {
         const reminder = {
           id: Number,
-          title: "",
+          reminder: "",
           user: "",
           city: "",
           date: Number,
@@ -75,7 +75,7 @@ describe("Adding new Reminder", () => {
   it("Correct Reminder", () => {
     const reminder = {
       id: 1729,
-      title: "A new Hope",
+      reminder: "A new Hope",
       user: "Camilo Villegas",
       city: "Medellin",
       date: 4,

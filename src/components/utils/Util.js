@@ -67,8 +67,8 @@ export function checkInfo(reminder) {
     return "Fields can't be empty. Please fill them.";
   }
 
-  if (reminder.title.length > 30) {
-    return "Title can't be more than 30 chars. Please correct title.";
+  if (reminder.reminder.length > 30) {
+    return "Reminder can't be more than 30 chars. Please correct reminder.";
   }
 
   return "TRUE";

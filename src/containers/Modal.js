@@ -21,11 +21,12 @@ class Modal extends Component {
     this.state = {
       reminder: {
         id: 0,
-        title: "",
+        reminder: "",
         user: "",
         city: "",
         date: 0,
         month: 0,
+        year: 0,
         time: "",
         color: "",
       },
@@ -39,19 +40,20 @@ class Modal extends Component {
 
       // Setting state with selected reminder
       this.state.reminder.id = selectedReminder[0].id;
-      this.state.reminder.title = selectedReminder[0].title;
+      this.state.reminder.reminder = selectedReminder[0].reminder;
       this.state.reminder.user = selectedReminder[0].user;
       this.state.reminder.city = selectedReminder[0].city;
       this.state.reminder.date = selectedReminder[0].date;
       this.state.reminder.month = selectedReminder[0].month;
+      this.state.reminder.year = selectedReminder[0].year;
       this.state.reminder.time = selectedReminder[0].time;
       this.state.reminder.color = selectedReminder[0].color;
     }
   }
 
   // Input handlers
-  handleTitleChange = (event) => {
-    const reminder = { ...this.state.reminder, title: event.target.value };
+  handleReminderChange = (event) => {
+    const reminder = { ...this.state.reminder, reminder: event.target.value };
     this.setState({ reminder });
   };
 
@@ -83,6 +85,7 @@ class Modal extends Component {
     this.state.reminder.id = this.props.date * Math.floor(Math.random() * 100);
     this.state.reminder.date = this.props.date;
     this.state.reminder.month = this.props.month;
+    this.state.reminder.year = this.props.year;
 
     // Correct info check of reminder
     if (checkInfo(this.state.reminder) === "TRUE") {
@@ -94,11 +97,12 @@ class Modal extends Component {
       this.setState({
         reminder: {
           id: 0,
-          title: "",
+          reminder: "",
           user: "",
           city: "",
           date: 0,
           month: 0,
+          year: 0,
           time: "",
           color: "",
         },
@@ -122,11 +126,12 @@ class Modal extends Component {
       this.setState({
         reminder: {
           id: 0,
-          title: "",
+          reminder: "",
           user: "",
           city: "",
           date: 0,
           month: 0,
+          year: 0,
           time: "",
           color: "",
         },
@@ -163,15 +168,16 @@ class Modal extends Component {
                 <h2 class="modal-title">Create Reminder</h2>
                 <hr style={{ marginBottom: "20px" }} />
 
-                {/* Title */}
+                {/* Reminder */}
                 <b>
-                  <p className="modal-subtitle">Title</p>
+                  <p className="modal-subtitle">Reminder</p>
                 </b>
                 <input
                   className="modal-input-subtitle"
                   type="text"
-                  onChange={this.handleTitleChange}
-                  value={this.state.reminder.title}
+                  onChange={this.handleReminderChange}
+                  value={this.state.reminder.reminder}
+                  placeholder="Make dinner"
                 />
 
                 {/* User */}
@@ -183,6 +189,7 @@ class Modal extends Component {
                   type="text"
                   onChange={this.handleUserChange}
                   value={this.state.reminder.user}
+                  placeholder="Camilo"
                 />
 
                 {/* City */}
@@ -194,6 +201,7 @@ class Modal extends Component {
                   type="text"
                   onChange={this.handleCityChange}
                   value={this.state.reminder.city}
+                  placeholder="Medellin"
                 />
 
                 {/* Time */}
@@ -245,15 +253,15 @@ class Modal extends Component {
                 <h2>Update Reminder</h2>
                 <hr style={{ marginBottom: "20px" }} />
 
-                {/* Title */}
+                {/* Reminder */}
                 <b>
-                  <p className="modal-subtitle">Title</p>
+                  <p className="modal-subtitle">Reminder</p>
                 </b>
                 <input
                   className="modal-input-subtitle"
                   type="text"
-                  onChange={this.handleTitleChange}
-                  value={this.state.reminder.title}
+                  onChange={this.handleReminderChange}
+                  value={this.state.reminder.reminder}
                 />
 
                 {/* User */}

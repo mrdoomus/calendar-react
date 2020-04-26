@@ -12,24 +12,22 @@ class App extends Component {
     this.handleModalChange = this.handleModalChange.bind(this);
 
     this.state = {
+      getDateNumber: 0,
       getMonthNumber: new Date().getMonth(),
       getYearNumber: new Date().getFullYear(),
       getModalStatus: false,
       getModalAction: "",
-      getDate: 0,
-      getMonth: 0,
       getId: 0,
     };
   }
 
   render() {
     const {
+      getDateNumber,
       getMonthNumber,
       getYearNumber,
       getModalStatus,
       getModalAction,
-      getDate,
-      getMonth,
       getId,
     } = this.state;
 
@@ -40,8 +38,9 @@ class App extends Component {
             <Modal
               modalStatus={getModalStatus}
               modalAction={getModalAction}
-              date={getDate}
-              month={getMonth}
+              date={getDateNumber}
+              month={getMonthNumber}
+              year={getYearNumber}
               id={getId}
               onModalChange={this.handleModalChange}
             />
@@ -68,19 +67,17 @@ class App extends Component {
     );
   }
 
-  handleModalChange(date, month, id, action) {
-    if (date && month && action === "CREATE") {
+  handleModalChange(date, id, action) {
+    if (date && action === "CREATE") {
       this.setState({
         getModalStatus: true,
-        getDate: date,
-        getMonth: month,
+        getDateNumber: date,
         getModalAction: "CREATE",
       });
-    } else if (date && month && id && action === "UPDATE") {
+    } else if (date && id && action === "UPDATE") {
       this.setState({
         getModalStatus: true,
-        getDate: date,
-        getMonth: month,
+        getDateNumber: date,
         getId: id,
         getModalAction: "UPDATE",
       });
