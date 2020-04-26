@@ -41,6 +41,7 @@ export function getWeeksForMonth(month, year) {
     currWeek.push(null);
   }
 
+  // Pushes every single day to a week row
   while (currDate.getMonth() === month) {
     if (currWeek.length === 7) {
       currWeek = [];
@@ -51,10 +52,12 @@ export function getWeeksForMonth(month, year) {
     currDate = new Date(year, month, currDate.getDate() + 1);
   }
 
+  // If there are remaining spaces, push nulls
   while (currWeek.length < 7) {
     currWeek.push(null);
   }
 
+  // return the whole month
   return weeks;
 }
 
@@ -63,10 +66,11 @@ export function getWeeksForMonth(month, year) {
 return - error if encountered or TRUE is no error encountered
 */
 export function checkInfo(reminder) {
+  // If there's any empty field
   if (Object.values(reminder).some((value) => value === "")) {
     return "Fields can't be empty. Please fill them.";
   }
-
+  // If reminder is more than 30 chars
   if (reminder.reminder.length > 30) {
     return "Reminder can't be more than 30 chars. Please correct reminder.";
   }
